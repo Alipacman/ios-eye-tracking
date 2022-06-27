@@ -11,6 +11,9 @@ public class EyeTracking: NSObject {
 
     // MARK: - Public Properties
 
+    public var rawLocationClosure: ((CGFloat, CGFloat) -> Void)? = nil
+    public var convertedLocationClosure: ((CGFloat, CGFloat) -> Void)? = nil
+    
     /// The currently running `Session`. If this is `nil`, then no `Session` is in progress.
     public var currentSession: Session?
 
@@ -518,7 +521,10 @@ extension EyeTracking {
         }
 
         guard let pointerFilter = pointerFilter else { return }
-
+        
+        rawLocationClosure?(point.x, point.y)
+        convertedLocationClosure?(pointerFilter.x.value, pointerFilter.y.value)
+        
         if loggingEnabled {
             os_log(
                 "Raw:       %{public}f, %{public}f",
@@ -527,6 +533,7 @@ extension EyeTracking {
                 point.x,
                 point.y
             )
+            
 
             os_log(
                 "Converted: %{public}f, %{public}f",
