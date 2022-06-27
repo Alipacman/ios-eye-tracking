@@ -11,6 +11,7 @@ public class EyeTracking: NSObject {
 
     // MARK: - Public Properties
 
+    public var manualPointerLocation: (CGFloat, CGFloat)? = nil
     public var rawLocationClosure: ((CGFloat, CGFloat) -> Void)? = nil
     public var convertedLocationClosure: ((CGFloat, CGFloat) -> Void)? = nil
     
@@ -545,8 +546,8 @@ extension EyeTracking {
         }
 
         pointer.frame = CGRect(
-            x: pointerFilter.x.value,
-            y: pointerFilter.y.value,
+            x: (manualPointerLocation?.0) ?? pointerFilter.x.value,
+            y: (manualPointerLocation?.1) ?? pointerFilter.y.value,
             width: pointer.frame.width,
             height: pointer.frame.height
         )
