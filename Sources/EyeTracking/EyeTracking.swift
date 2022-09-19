@@ -66,7 +66,7 @@ public class EyeTracking: NSObject {
     /// Default size is 30x30 and color is blue, but this can be customized
     /// like any other `UIView`.
     ///
-    public lazy var pointer: UIView
+    public var pointer: UIView
 
     ///
     /// Create an instance of `EyeTracking` with a given `Configuration`.
