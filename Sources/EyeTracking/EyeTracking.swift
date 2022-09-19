@@ -66,14 +66,7 @@ public class EyeTracking: NSObject {
     /// Default size is 30x30 and color is blue, but this can be customized
     /// like any other `UIView`.
     ///
-    public lazy var pointer: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        view.layer.cornerRadius = view.frame.size.width / 2
-        view.layer.cornerCurve = .continuous
-        view.backgroundColor = .blue
-        view.layer.zPosition = .greatestFiniteMagnitude
-        return view
-    }()
+    public lazy var pointer: UIView
 
     ///
     /// Create an instance of `EyeTracking` with a given `Configuration`.
@@ -82,7 +75,8 @@ public class EyeTracking: NSObject {
     ///
     /// - parameter configuration: The initial configuration object for EyeTracking. See its documentation for details.
     ///
-    public required init(configuration: Configuration) {
+    public required init(configuration: Configuration, pointer: UIView) {
+        self.pointer = pointer
         self.configuration = configuration
         super.init()
     }
